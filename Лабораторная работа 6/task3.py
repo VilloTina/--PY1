@@ -1,13 +1,25 @@
 OUTPUT_FILE = "output.csv"
-def to_csv_file(filename: str, headers: list [str], rows: list[list[str]], delimiter =",", newline ="\n") -> None:
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(delimiter.join(headers)+newline)
-        f.writelines(delimiter.join(item)+newline for item in rows)
 
 
 # TODO реализовать функцию to_csv_file
-
-
+def to_csv_file(filename, headers, rows, delimiter=",", new_line="\n"):
+    with open(filename, "w") as f:
+        headers[-1] = headers[-1] + new_line
+        rows[0][-1] = rows[0][-1] + new_line
+        rows[1][-1] = rows[1][-1] + new_line
+        rows[2][-1] = rows[2][-1] + new_line
+        rows[3][-1] = rows[3][-1] + new_line
+        headers_csv = delimiter.join(map(str, headers))
+        rows_csv0 = delimiter.join(map(str, rows[0]))
+        rows_csv1 = delimiter.join(map(str, rows[1]))
+        rows_csv2 = delimiter.join(map(str, rows[2]))
+        rows_csv3 = delimiter.join(map(str, rows[3]))
+        f.write(headers_csv)
+    with open(filename, "a") as f1:
+        f1.write(rows_csv0)
+        f1.write(rows_csv1)
+        f1.write(rows_csv2)
+        f1.write(rows_csv3)
 headers_list = ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income', 'median_house_value']
 data = [
     ['-122.050000', '37.370000', '27.000000', '3885.000000', '661.000000', '1537.000000', '606.000000', '6.608500', '344700.000000'],
@@ -18,6 +30,7 @@ data = [
 
 # TODO вызвать функцию to_csv_file и записать данные в файл
 to_csv_file(OUTPUT_FILE, headers_list, data)
+
 with open(OUTPUT_FILE) as output_f:
     for line in output_f:
         print(line, end="")
