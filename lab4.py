@@ -52,7 +52,7 @@ class Thief(Criminal):
         :return: выводит статью наказания
         Пример:
         >>> thief = Thief('Daniel', 'Wanted', '200000')
-        >>> vaultdoor.open_door('2000000')
+        >>> thief.detemine_punishment('2000000')
         """
         ...
 
